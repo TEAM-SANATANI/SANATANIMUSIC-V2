@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: telegram-music-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: BOT_TOKEN
+        sync: false          # paste in Render dashboard
+      - key: MONGO_URI
+        sync: false          # paste MongoDB Atlas URI (optional)
+      - key: OWNER_ID
+        sync: false          # your Telegram numeric ID (for /stats, /broadcast)
+      - key: DB_NAME
+        value: musicbot
+      - key: MAX_PARALLEL
+        value: "2"
